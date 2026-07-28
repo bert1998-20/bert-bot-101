@@ -938,26 +938,25 @@ SCOPES = [
 SITES = {
     "bingo101official.org": {
         "gsc_url": "https://bingo101official.org/",
-        "ga4_property_id": "399573638",
+        "ga4_property_id": "544627293",  # ← Use the correct PROPERTY ID for this site
         "default_keyword": "Bingo 101",
         "category": "Bingo",
         "ahrefs_target": "Bingo 101"
     },
     "bingo101official.net": {
         "gsc_url": "https://bingo101official.net/",
-        "ga4_property_id": "399573638",
+        "ga4_property_id": "543553575",  # ← Use the correct PROPERTY ID for this site
         "default_keyword": "Bingo 101",
         "category": "Bingo",
         "ahrefs_target": "Bingo 101"
     },
     "rumble-rummy.net": {
         "gsc_url": "http://rumble-rummy.net/",
-        "ga4_property_id": "399573638",
+        "ga4_property_id": "544627290",  # ← Use the correct PROPERTY ID for this site
         "default_keyword": "rumble rummy",
         "category": "rumble rummy",
         "ahrefs_target": "rumble rummy"
     },
-  
 }
 
 SITE_METRICS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2lub4F_fMu-V_F6EMlqJOHpPIpRWhsKxgpjQOBkkTsppku31ZIIu-0yfWGFo7WVSek2xMYMd_lsop/pub?output=csv"
