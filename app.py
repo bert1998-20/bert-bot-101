@@ -402,26 +402,6 @@ h1, h2, h3, h4, h5, h6, p, label, div {
     font-weight: 300;
 }
 
-.section-title-ai {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    backdrop-filter: blur(10px);
-}
-
-.section-title-ai::before {
-    content: '🤖';
-    font-size: 1.5rem;
-}
-
 /* ===== KPI CARDS ===== */
 .kpi-card {
     background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
@@ -481,136 +461,6 @@ h1, h2, h3, h4, h5, h6, p, label, div {
     top: 1rem;
     font-size: 1.5rem;
     opacity: 0.2;
-}
-
-/* ===== AI CARDS ===== */
-.ai-card {
-    background: linear-gradient(145deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.05));
-    border: 1px solid rgba(139, 92, 246, 0.15);
-    border-radius: 20px;
-    padding: 1.5rem;
-    backdrop-filter: blur(20px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    min-height: 140px;
-}
-
-.ai-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
-}
-
-.ai-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.08), transparent 70%);
-    pointer-events: none;
-}
-
-.ai-card .value {
-    font-size: 2.2rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #c4b5fd, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
-}
-
-.ai-card .label {
-    font-size: 0.7rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-}
-
-.ai-card .icon {
-    font-size: 2rem;
-    opacity: 0.6;
-    position: absolute;
-    right: 1.2rem;
-    top: 1.2rem;
-}
-# =========================
-# GA4 DEBUG - ADD THIS SECTION
-# =========================
-
-# Add this for debugging GA4
-st.sidebar.markdown("---")
-st.sidebar.markdown('<div class="sidebar-label">🔧 GA4 Debug</div>', unsafe_allow_html=True)
-
-# Test GA4 connection
-try:
-    test_client = BetaAnalyticsDataClient(credentials=creds)
-    test_request = RunReportRequest(
-        property=f"properties/{ga4_property_id}",
-        date_ranges=[DateRange(start_date="30daysAgo", end_date="today")],
-        metrics=[Metric(name="sessions")]
-    )
-    test_response = test_client.run_report(test_request)
-    if test_response.rows:
-        test_sessions = int(test_response.rows[0].metric_values[0].value)
-        st.sidebar.success(f"✅ GA4 Connected! Sessions: {test_sessions:,}")
-    else:
-        st.sidebar.warning("⚠️ GA4 connected but NO data found")
-        st.sidebar.info("Make sure your GA4 property has data in the last 30 days")
-except Exception as e:
-    st.sidebar.error(f"❌ GA4 Debug Error: {str(e)[:100]}...")
-    st.sidebar.info("Check: 1) API enabled 2) Service account has access 3) Property ID is correct")
-
-.ai-insight-card {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
-    border: 1px solid rgba(139, 92, 246, 0.12);
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    backdrop-filter: blur(20px);
-    transition: all 0.3s ease;
-}
-
-.ai-insight-card:hover {
-    border-color: rgba(139, 92, 246, 0.25);
-    transform: translateX(4px);
-}
-
-.badge {
-    display: inline-block;
-    padding: 0.2rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.badge-positive {
-    background: rgba(34, 197, 94, 0.15);
-    color: #22c55e;
-    border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.badge-negative {
-    background: rgba(239, 68, 68, 0.15);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.badge-neutral {
-    background: rgba(251, 146, 60, 0.15);
-    color: #fb923c;
-    border: 1px solid rgba(251, 146, 60, 0.2);
-}
-
-.badge-info {
-    background: rgba(59, 130, 246, 0.15);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 /* ===== ALERT CARDS ===== */
@@ -938,28 +788,26 @@ SCOPES = [
 SITES = {
     "bingo101official.org": {
         "gsc_url": "https://bingo101official.org/",
-        "ga4_property_id": "544627293",  # ← Use the correct PROPERTY ID for this site
+        "ga4_property_id": "544627293",
         "default_keyword": "Bingo 101",
         "category": "Bingo",
         "ahrefs_target": "Bingo 101"
     },
     "bingo101official.net": {
         "gsc_url": "https://bingo101official.net/",
-        "ga4_property_id": "543553575",  # ← Use the correct PROPERTY ID for this site
+        "ga4_property_id": "543553575",
         "default_keyword": "Bingo 101",
         "category": "Bingo",
         "ahrefs_target": "Bingo 101"
     },
     "rumble-rummy.net": {
         "gsc_url": "http://rumble-rummy.net/",
-        "ga4_property_id": "544627290",  # ← Use the correct PROPERTY ID for this site
+        "ga4_property_id": "544627290",
         "default_keyword": "rumble rummy",
         "category": "rumble rummy",
         "ahrefs_target": "rumble rummy"
     },
 }
-
-SITE_METRICS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2lub4F_fMu-V_F6EMlqJOHpPIpRWhsKxgpjQOBkkTsppku31ZIIu-0yfWGFo7WVSek2xMYMd_lsop/pub?output=csv"
 
 
 # =========================
@@ -976,7 +824,6 @@ st.sidebar.markdown("""
 # Site Selection
 st.sidebar.markdown('<div class="sidebar-label">📍 Site Selection</div>', unsafe_allow_html=True)
 
-# Use a different approach - using a list and index
 site_list = list(SITES.keys())
 selected_index = st.sidebar.selectbox(
     "",
@@ -1015,7 +862,6 @@ else:
 # Date Range
 st.sidebar.markdown('<div class="sidebar-label">📅 Date Range</div>', unsafe_allow_html=True)
 
-# Use columns for better layout
 col1, col2 = st.sidebar.columns(2)
 
 with col1:
@@ -1101,18 +947,6 @@ def get_value_by_possible_keys(data, possible_keys, default="N/A"):
     return default
 
 
-def clean_number(value):
-    if isinstance(value, (int, float)):
-        return float(value)
-    if isinstance(value, str):
-        cleaned = value.replace('₱', '').replace('$', '').replace(',', '').replace(' ', '').strip()
-        try:
-            return float(cleaned)
-        except:
-            return 0
-    return 0
-
-
 # =========================
 # DATA FUNCTIONS
 # =========================
@@ -1194,92 +1028,42 @@ def get_gsc_pages(site_url, start_date, end_date):
 
 @st.cache_data(ttl=60)
 def get_ga4_data(property_id):
-    client = BetaAnalyticsDataClient(credentials=creds)
-    request = RunReportRequest(
-        property=f"properties/{property_id}",
-        date_ranges=[
-            DateRange(start_date=GA4_START_DATE, end_date=GA4_END_DATE)
-        ],
-        metrics=[
-            Metric(name="sessions"),
-            Metric(name="activeUsers"),
-            Metric(name="totalUsers"),
-            Metric(name="screenPageViews")
-        ]
-    )
-    response = client.run_report(request)
-    if not response.rows:
+    try:
+        client = BetaAnalyticsDataClient(credentials=creds)
+        request = RunReportRequest(
+            property=f"properties/{property_id}",
+            date_ranges=[
+                DateRange(start_date=GA4_START_DATE, end_date=GA4_END_DATE)
+            ],
+            metrics=[
+                Metric(name="sessions"),
+                Metric(name="activeUsers"),
+                Metric(name="totalUsers"),
+                Metric(name="screenPageViews")
+            ]
+        )
+        response = client.run_report(request)
+        if not response.rows:
+            return {
+                "sessions": 0,
+                "active_users": 0,
+                "total_users": 0,
+                "pageviews": 0
+            }
+        row = response.rows[0]
+        return {
+            "sessions": int(row.metric_values[0].value),
+            "active_users": int(row.metric_values[1].value),
+            "total_users": int(row.metric_values[2].value),
+            "pageviews": int(row.metric_values[3].value)
+        }
+    except Exception as e:
         return {
             "sessions": 0,
             "active_users": 0,
             "total_users": 0,
             "pageviews": 0
         }
-    row = response.rows[0]
-    return {
-        "sessions": int(row.metric_values[0].value),
-        "active_users": int(row.metric_values[1].value),
-        "total_users": int(row.metric_values[2].value),
-        "pageviews": int(row.metric_values[3].value)
-    }
-
-
-@st.cache_data(ttl=60)
-def get_metrics_data():
-    try:
-        df = pd.read_csv(SITE_METRICS_URL)
-        if df.empty:
-            return pd.DataFrame()
-        
-        df.columns = df.columns.str.strip()
-        
-        month_col = None
-        reg_col = None
-        ftd_col = None
-        pl_col = None
-        
-        for col in df.columns:
-            col_lower = col.lower().strip()
-            if 'month' in col_lower or 'date' in col_lower:
-                month_col = col
-            elif 'regist' in col_lower or 'reg' in col_lower:
-                reg_col = col
-            elif 'ftd' in col_lower:
-                ftd_col = col
-            elif 'profit' in col_lower or 'loss' in col_lower or 'pl' in col_lower:
-                pl_col = col
-        
-        if month_col:
-            df = df.rename(columns={month_col: 'Month'})
-        if reg_col:
-            df = df.rename(columns={reg_col: 'Registrations'})
-        if ftd_col:
-            df = df.rename(columns={ftd_col: 'FTD'})
-        if pl_col:
-            df = df.rename(columns={pl_col: 'Profit/Loss'})
-        
-        required_cols = ['Month', 'Registrations', 'FTD', 'Profit/Loss']
-        for col in required_cols:
-            if col not in df.columns:
-                df[col] = 0
-        
-        for col in ['Registrations', 'FTD', 'Profit/Loss']:
-            if col in df.columns:
-                df[col] = df[col].apply(clean_number)
-                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
-        
-        df = df.dropna(subset=['Month'], how='all')
-        df = df[df['Month'].astype(str).str.strip() != '']
-        
-        if df.empty:
-            return pd.DataFrame()
-        
-        st.sidebar.success(f"✅ Metrics loaded: {len(df)} rows")
-        return df
-        
-    except Exception as e:
-        st.sidebar.error(f"❌ Error loading metrics: {str(e)}")
-        return pd.DataFrame()
 
 
 @st.cache_data(ttl=3600)
@@ -1477,17 +1261,6 @@ except:
     ga4_data = {"sessions": 0, "active_users": 0, "total_users": 0, "pageviews": 0}
     st.sidebar.markdown('<span class="data-loaded-badge error">❌ GA4 Error</span>', unsafe_allow_html=True)
 
-# Load Metrics Data
-try:
-    metrics_df = get_metrics_data()
-    if not metrics_df.empty:
-        st.sidebar.markdown(f'<span class="data-loaded-badge success">✅ Metrics: {len(metrics_df)} rows</span>', unsafe_allow_html=True)
-    else:
-        st.sidebar.markdown('<span class="data-loaded-badge warning">⚠️ Metrics: Empty</span>', unsafe_allow_html=True)
-except:
-    metrics_df = pd.DataFrame()
-    st.sidebar.markdown('<span class="data-loaded-badge error">❌ Metrics Error</span>', unsafe_allow_html=True)
-
 serp_df = pd.DataFrame()
 serp_error = None
 
@@ -1526,32 +1299,6 @@ else:
     avg_position = 0
 
 unique_queries = len(queries_df) if not queries_df.empty else 0
-
-# Get metrics from your data
-if not metrics_df.empty:
-    latest_row = metrics_df.iloc[-1]
-    latest_month = str(latest_row['Month']) if pd.notna(latest_row['Month']) else 'N/A'
-    latest_registrations = int(latest_row['Registrations']) if pd.notna(latest_row['Registrations']) else 0
-    latest_ftd = int(latest_row['FTD']) if pd.notna(latest_row['FTD']) else 0
-    latest_profit_loss = float(latest_row['Profit/Loss']) if pd.notna(latest_row['Profit/Loss']) else 0
-    
-    total_registrations = int(metrics_df['Registrations'].sum()) if 'Registrations' in metrics_df.columns else 0
-    total_ftd = int(metrics_df['FTD'].sum()) if 'FTD' in metrics_df.columns else 0
-    total_profit_loss = float(metrics_df['Profit/Loss'].sum()) if 'Profit/Loss' in metrics_df.columns else 0
-    ftd_rate = (total_ftd / total_registrations * 100) if total_registrations > 0 else 0
-    metrics_count = len(metrics_df)
-else:
-    latest_month = 'N/A'
-    latest_registrations = 0
-    latest_ftd = 0
-    latest_profit_loss = 0
-    total_registrations = 0
-    total_ftd = 0
-    total_profit_loss = 0
-    ftd_rate = 0
-    metrics_count = 0
-
-health_score = 0
 
 ahrefs_domain_rating = get_value_by_possible_keys(
     ahrefs_dr_data,
@@ -1672,27 +1419,6 @@ def generate_ai_alerts():
             "body": "Ahrefs API key or endpoint access may need checking. GSC and GA4 data are still working."
         })
 
-    if not metrics_df.empty:
-        if latest_profit_loss < 0:
-            alerts.append({
-                "level": "danger",
-                "title": f"💰 Negative Profit/Loss: ₱{abs(latest_profit_loss):,.2f}",
-                "body": f"The latest month ({latest_month}) shows a loss. Review your financial performance."
-            })
-        elif latest_profit_loss > 10000:
-            alerts.append({
-                "level": "success",
-                "title": f"💰 Strong Profit: ₱{latest_profit_loss:,.2f}",
-                "body": f"Your latest month ({latest_month}) shows strong profitability!"
-            })
-        
-        if latest_registrations < 100 and latest_registrations > 0:
-            alerts.append({
-                "level": "warning",
-                "title": f"📊 Low Registrations: {latest_registrations}",
-                "body": f"Latest month ({latest_month}) only had {latest_registrations:,} registrations. Consider increasing marketing."
-            })
-
     if not alerts:
         alerts.append({
             "level": "success",
@@ -1747,11 +1473,6 @@ def generate_pdf_report():
         f"Average CTR: {avg_ctr}%",
         f"Average Position: {avg_position}",
         f"GA4 Sessions: {ga4_data['sessions']:,}",
-        f"Latest Month: {latest_month}",
-        f"Latest Registrations: {latest_registrations:,}",
-        f"Latest FTD: {latest_ftd:,}",
-        f"Latest Profit/Loss: ₱{latest_profit_loss:,.2f}",
-        f"FTD Rate: {ftd_rate:.1f}%",
         f"SERP Rank: {rank_position}",
         f"Ahrefs DR: {ahrefs_domain_rating}",
         f"Ahrefs Rank: {ahrefs_rank}",
@@ -1826,7 +1547,7 @@ st.markdown(f"""
 <div class="dashboard-header">
     <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
         <div>
-            <div class="dashboard-title">Seo Tracking Dashboard</div>
+            <div class="dashboard-title">SEO Tracking Dashboard</div>
             <div class="dashboard-subtitle">Performance intelligence & analytics dashboard</div>
             <div style="display: flex; gap: 0.75rem; margin-top: 0.75rem; flex-wrap: wrap;">
                 <span class="dashboard-badge live-indicator">● Live</span>
@@ -2424,26 +2145,6 @@ with ahrefs_col3:
             st.markdown('<p class="warning-text">No ref domain data available</p>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# Monthly Metrics Download
-st.markdown("""
-<div style="display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0 1rem 0;">
-    <span style="font-size: 1.2rem;">📈</span>
-    <span style="color: #e5e7eb; font-weight: 700; font-size: 1rem;">Monthly Metrics</span>
-</div>
-""", unsafe_allow_html=True)
-
-metrics_col1, metrics_col2, metrics_col3 = st.columns([1, 2, 1])
-
-with metrics_col2:
-    with st.container():
-        st.markdown('<div class="download-container">', unsafe_allow_html=True)
-        if not metrics_df.empty:
-            href, filename = create_html_download(metrics_df, "Monthly Performance Metrics", "monthly_metrics")
-            st.markdown(f'<a href="{href}" download="{filename}" target="_blank"><button class="download-btn download-btn-metrics">📊 Download Monthly Metrics</button></a>', unsafe_allow_html=True)
-        else:
-            st.markdown('<p class="warning-text">No metrics data available</p>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
 # Combined Export
 st.markdown("""
 <div style="display: flex; align-items: center; gap: 0.75rem; margin: 2rem 0 1rem 0;">
@@ -2482,14 +2183,6 @@ if all_data_available:
             <p><strong>Site:</strong> {selected_site}</p>
             <p><strong>Date Range:</strong> {GSC_START_DATE} to {GSC_END_DATE}</p>
     """
-    
-    if not metrics_df.empty:
-        combined_html += f"""
-        <div class="section">
-            <h2>📊 Monthly Metrics</h2>
-            {metrics_df.to_html(index=False, classes='table')}
-        </div>
-        """
     
     if not gsc_df.empty:
         combined_html += f"""
@@ -2687,19 +2380,18 @@ with s3:
     """, unsafe_allow_html=True)
 
 with s4:
-    profit_color = "#22c55e" if latest_profit_loss >= 0 else "#ef4444"
     st.markdown(f"""
     <div class="glass-card" style="border-left: 4px solid #22c55e;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div>
-                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.08em;">Latest Performance</div>
-                <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin: 0.5rem 0;">{latest_registrations:,}</div>
+                <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.08em;">Sessions</div>
+                <div style="font-size: 2rem; font-weight: 800; color: #ffffff; margin: 0.5rem 0;">{ga4_data['sessions']:,}</div>
             </div>
             <div style="font-size: 1.5rem; opacity: 0.3;">📊</div>
         </div>
         <div style="display: flex; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.06);">
-            <div><span style="color: #94a3b8; font-size: 0.75rem;">FTD</span> <span style="color: #facc15; font-weight: 600; margin-left: 0.5rem;">{latest_ftd:,}</span></div>
-            <div><span style="color: #94a3b8; font-size: 0.75rem;">P/L</span> <span style="color: {profit_color}; font-weight: 600; margin-left: 0.5rem;">₱{latest_profit_loss:,.2f}</span></div>
+            <div><span style="color: #94a3b8; font-size: 0.75rem;">Active Users</span> <span style="color: #facc15; font-weight: 600; margin-left: 0.5rem;">{ga4_data['active_users']:,}</span></div>
+            <div><span style="color: #94a3b8; font-size: 0.75rem;">Pageviews</span> <span style="color: #34d399; font-weight: 600; margin-left: 0.5rem;">{ga4_data['pageviews']:,}</span></div>
         </div>
     </div>
     """, unsafe_allow_html=True)
