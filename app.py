@@ -910,48 +910,28 @@ SCOPES = [
 ]
 
 SITES = {
-    "scatter.ph": {
-        "gsc_url": "https://scatter.ph/",
-        "ga4_property_id": "539752374",
-        "default_keyword": "scatter",
-        "category": "Scatter",
-        "ahrefs_target": "scatter.ph"
+    "bingo101official.org": {
+        "gsc_url": "https://bingo101official.org/",
+        "ga4_property_id": "399573638",
+        "default_keyword": "Bingo 101",
+        "category": "Bingo",
+        "ahrefs_target": "Bingo 101"
     },
-    "casinophilippines.ph": {
-        "gsc_url": "https://casinophilippines.ph/",
-        "ga4_property_id": "539755738",
-        "default_keyword": "Casino Philippines",
-        "category": "Casino Philippines",
-        "ahrefs_target": "casinophilippines.ph"
+    "bingo101official.net": {
+        "gsc_url": "https://bingo101official.net/",
+        "ga4_property_id": "399573638",
+        "default_keyword": "Bingo 101",
+        "category": "Bingo",
+        "ahrefs_target": "Bingo 101"
     },
-    "sabong-international.ph": {
-        "gsc_url": "https://sabong-international.ph",
-        "ga4_property_id": "539981192",
-        "default_keyword": "SabongInternational",
-        "category": "Sabong Online",
-        "ahrefs_target": "sabong-international.ph"
+    "rumble-rummy.net": {
+        "gsc_url": "http://rumble-rummy.net/",
+        "ga4_property_id": "399573638",
+        "default_keyword": "rumble rummy",
+        "category": "rumble rummy",
+        "ahrefs_target": "rumble rummy"
     },
-    "juan365.net.ph": {
-        "gsc_url": "https://juan365.net.ph/",
-        "ga4_property_id": "508243783",
-        "default_keyword": "juan365",
-        "category": "Online Casino",
-        "ahrefs_target": "https://juan365.net.ph"
-    },
-    "pinoy-365.io": {
-        "gsc_url": "https://pinoy-365.io",
-        "ga4_property_id": "540067555",
-        "default_keyword": "Pinoy 365",
-        "category": "Online Casino",
-        "ahrefs_target": "https://pinoy-365.io"
-    },
-    "juan365philippines.com": {
-        "gsc_url": "https://juan365philippines.com/",
-        "ga4_property_id": "503128547",
-        "default_keyword": "Juan 365",
-        "category": "Online Casino",
-        "ahrefs_target": "https://juan365philippines.com/"
-    },
+  
 }
 
 SITE_METRICS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2lub4F_fMu-V_F6EMlqJOHpPIpRWhsKxgpjQOBkkTsppku31ZIIu-0yfWGFo7WVSek2xMYMd_lsop/pub?output=csv"
