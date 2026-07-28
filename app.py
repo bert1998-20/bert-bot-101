@@ -801,7 +801,7 @@ SITES = {
         "ahrefs_target": "Bingo 101"
     },
     "rumble-rummy.net": {
-        "gsc_url": "http://rumble-rummy.net/",
+        "gsc_url": "https://rumble-rummy.net/",
         "ga4_property_id": "544627290",
         "default_keyword": "rumble rummy",
         "category": "rumble rummy",
