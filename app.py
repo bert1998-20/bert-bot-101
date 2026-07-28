@@ -538,6 +538,32 @@ h1, h2, h3, h4, h5, h6, p, label, div {
     right: 1.2rem;
     top: 1.2rem;
 }
+# =========================
+# GA4 DEBUG - ADD THIS SECTION
+# =========================
+
+# Add this for debugging GA4
+st.sidebar.markdown("---")
+st.sidebar.markdown('<div class="sidebar-label">🔧 GA4 Debug</div>', unsafe_allow_html=True)
+
+# Test GA4 connection
+try:
+    test_client = BetaAnalyticsDataClient(credentials=creds)
+    test_request = RunReportRequest(
+        property=f"properties/{ga4_property_id}",
+        date_ranges=[DateRange(start_date="30daysAgo", end_date="today")],
+        metrics=[Metric(name="sessions")]
+    )
+    test_response = test_client.run_report(test_request)
+    if test_response.rows:
+        test_sessions = int(test_response.rows[0].metric_values[0].value)
+        st.sidebar.success(f"✅ GA4 Connected! Sessions: {test_sessions:,}")
+    else:
+        st.sidebar.warning("⚠️ GA4 connected but NO data found")
+        st.sidebar.info("Make sure your GA4 property has data in the last 30 days")
+except Exception as e:
+    st.sidebar.error(f"❌ GA4 Debug Error: {str(e)[:100]}...")
+    st.sidebar.info("Check: 1) API enabled 2) Service account has access 3) Property ID is correct")
 
 .ai-insight-card {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
